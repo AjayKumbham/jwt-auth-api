@@ -18,7 +18,7 @@ public class EmailService {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
         
-        helper.setFrom("evernorthteam2@gmail.com");
+        helper.setFrom("your-email@gmail.com");
         helper.setTo(to);
         helper.setSubject("Welcome to Our Application!");
         helper.setText("Dear " + name + ",\n\nWelcome to our application! We're glad to have you on board.");
