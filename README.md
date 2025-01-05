@@ -50,7 +50,7 @@ Before you begin, ensure you have met the following requirements:
    jwt.secret=your-jwt-secret
    ```
 
-   Replace `your-email@example.com`, `your-email-password` with your actual gmail details.
+   Replace `your-email@example.com`, `your-email-password` and `your-jwt-secret` with your actual details.
 
 3. **Database Configuration**
 
