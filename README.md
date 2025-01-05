@@ -40,7 +40,7 @@ Before you begin, ensure you have met the following requirements:
 
 2. **Configure Application Properties**:
 
-   Edit `src/main/resources/application.properties` to include your SMTP server configuration and other necessary properties such as database and JWT secret key.
+   Edit `src/main/resources/application.properties` to include your SMTP server configuration and JWT secret key.
 
    ```properties
    spring.mail.host=smtp.yourmail.com
