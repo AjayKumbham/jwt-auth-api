@@ -49,8 +49,21 @@ Before you begin, ensure you have met the following requirements:
    spring.mail.password=your-email-password
    jwt.secret=your-jwt-secret
    ```
+3. **Database Configuration**
 
-3. **Build and Run the Application**:
+   To configure the MySQL database, update the following properties in `src/main/resources/application.properties`:
+
+   ```properties
+   spring.datasource.url=jdbc:mysql://localhost:3306/your_database_name
+   spring.datasource.username=your_database_username
+   spring.datasource.password=your_database_password
+   spring.jpa.hibernate.ddl-auto=update
+   spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
+   ```
+
+   Replace `your_database_name`, `your_database_username`, and `your_database_password` with your actual MySQL details.
+
+4. **Build and Run the Application**:
 
    Using Maven, run the following command to build and start the application:
 
