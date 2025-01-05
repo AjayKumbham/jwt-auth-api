@@ -64,7 +64,12 @@ Before you begin, ensure you have met the following requirements:
    Replace `your_database_name`, `your_database_username`, and `your_database_password` with your actual MySQL details.
 
 4. **Build and Run the Application**:
+   
+   First, clean and install the dependencies by running:
 
+   ```bash
+   mvn clean install
+   ```
    Using Maven, run the following command to build and start the application:
 
    ```bash
@@ -195,7 +200,7 @@ screenshots of the API testing in Postman:
 ---
 
 ### 5. **JWT Token Encoding and Decoding**
--Here’s how the JWT token is decoded using [JWT.io](https://jwt.io/).
+Here’s how the JWT token is decoded using [JWT.io](https://jwt.io/).
 
 **Screenshot**:
 ![JWT Token Decoded](screenshots/screenshot5.png)
@@ -203,7 +208,8 @@ screenshots of the API testing in Postman:
 ---
 
 ### 6. **MySQL Database (UserInfo Table)**
-- After registering a user, you can verify the data in the MySQL `UserInfo` table.
+After registering a user, you can verify the data in the MySQL `UserInfo` table.
+  
 **Screenshot**:
 ![User Info in MySQL](screenshots/screenshot6.png)
 
