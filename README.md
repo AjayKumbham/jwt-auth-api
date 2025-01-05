@@ -26,7 +26,7 @@ Before you begin, ensure you have met the following requirements:
 
 - Java 8 or higher.
 - Maven (for dependency management and build automation).
-- Spring Boot 2.x.
+- Spring Boot 3.x.
 - Access to an SMTP server for email functionality.
 
 ## Installation
@@ -34,7 +34,7 @@ Before you begin, ensure you have met the following requirements:
 1. **Clone the Repository**:
 
    ```bash
-   git clone https://github.com/your-username/your-repository.git
+   git clone https://github.com/ajay-kumbham/JWT-Authentication.git
    cd your-repository
    ```
 
