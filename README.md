@@ -43,12 +43,15 @@ Before you begin, ensure you have met the following requirements:
    Edit `src/main/resources/application.properties` to include your SMTP server configuration and JWT secret key.
 
    ```properties
-   spring.mail.host=smtp.yourmail.com
+   spring.mail.host=smtp.gmail.com
    spring.mail.port=587
    spring.mail.username=your-email@example.com
    spring.mail.password=your-email-password
    jwt.secret=your-jwt-secret
    ```
+
+   Replace `your-email@example.com`, `your-email-password` with your actual gmail details.
+
 3. **Database Configuration**
 
    To configure the MySQL database, update the following properties in `src/main/resources/application.properties`:
