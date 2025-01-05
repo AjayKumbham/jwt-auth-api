@@ -75,10 +75,21 @@ Before you begin, ensure you have met the following requirements:
 
 The following are the available API endpoints in the application:
 
-### 1. **Register User**
+### 1. **Welcome Endpoint** (Non-Secure)
+
+- **Method**: `GET`
+- **Endpoint**: `http://localhost:8080/auth/welcome`
+- **Description**: A simple, non-secure endpoint to welcome users.
+
+- **Response**:
+
+   ```plaintext
+   Welcome, this endpoint is not secure.
+
+### 2. **Register User**
 
 - **Method**: `POST`
-- **Endpoint**: `/api/auth/register`
+- **Endpoint**: `http://localhost:8080/auth/register`
 - **Description**: Registers a new user. A welcome email is sent upon successful registration.
 - **Request Body**:
 
@@ -97,10 +108,10 @@ The following are the available API endpoints in the application:
    User Added Successfully. A welcome email has been sent.
    ```
 
-### 2. **Login**
+### 3. **Login**
 
 - **Method**: `POST`
-- **Endpoint**: `/api/auth/login`
+- **Endpoint**: `http://localhost:8080/auth/login`
 - **Description**: Logs in the user and returns a JWT token.
 - **Request Body**:
 
@@ -117,10 +128,10 @@ The following are the available API endpoints in the application:
    jwt-token
    ```
 
-### 3. **Get User Profile**
+### 4. **Get User Profile**
 
 - **Method**: `GET`
-- **Endpoint**: `/api/user/profile`
+- **Endpoint**: `http://localhost:8080/user/user-profile`
 - **Description**: Fetches the user's profile information. Requires authentication (JWT token).
 - **Request Header**: `Authorization: Bearer <your-jwt-token>`
 
@@ -137,21 +148,21 @@ You can use Postman to test the endpoints. Here are the steps for each:
 1. **Register User**: 
 
    - Set the HTTP method to `POST`.
-   - Use the `/api/auth/register` endpoint.
+   - Use the `http://localhost:8080/auth/register` endpoint.
    - Add the request body as shown above.
    - Press "Send" and check the response.
 
 2. **Login**:
 
    - Set the HTTP method to `POST`.
-   - Use the `/api/auth/login` endpoint.
+   - Use the `http://localhost:8080/auth/login` endpoint.
    - Add the login credentials in the request body.
    - Press "Send" and retrieve the JWT token from the response.
 
 3. **Get User Profile**:
 
    - Set the HTTP method to `GET`.
-   - Use the `/api/user/profile` endpoint.
+   - Use the `http://localhost:8080/user/user-profile` endpoint.
    - Add the `Authorization` header with the value `Bearer <your-jwt-token>`.
    - Press "Send" to view the profile data.
 
