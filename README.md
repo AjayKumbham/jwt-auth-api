@@ -113,11 +113,8 @@ The following are the available API endpoints in the application:
 
 - **Response**:
 
-   ```json
-   {
-     "username": "user123",
-     "email": "user@example.com"
-   }
+   ```plaintext
+   Welcome to User Profile.
    ```
 
 ## Testing with Postman
@@ -147,11 +144,45 @@ You can use Postman to test the endpoints. Here are the steps for each:
 
 ### Screenshots
 
-Here, you can include screenshots of the API testing in Postman:
+screenshots of the API testing in Postman:
 
-1. Screenshot of the **Register User** endpoint testing.
-2. Screenshot of the **Login** endpoint testing.
-3. Screenshot of the **User Profile** endpoint testing.
+### 1. **Welcome Endpoint** (Non-Secure)
+**Screenshot**:
+![Welcome Endpoint](screenshots/screenshot1.png)
+
+---
+
+### 2. **Register Endpoint**
+**Screenshot**:
+![Register Endpoint](screenshots/screenshot2.png)
+
+---
+
+### 3. **Login Endpoint**
+**Screenshot**:
+![Login Endpoint](screenshots/screenshot3.png)
+
+---
+
+### 4. **User Profile Endpoint**
+**Screenshot**:
+![User Profile Endpoint](screenshots/screenshot4.png)
+
+---
+
+### 5. **JWT Token Encoding and Decoding**
+-Here’s how the JWT token is decoded using [JWT.io](https://jwt.io/).
+
+**Screenshot**:
+![JWT Token Decoded](screenshots/screenshot5.png)
+
+---
+
+### 6. **MySQL Database (UserInfo Table)**
+- After registering a user, you can verify the data in the MySQL `UserInfo` table.
+**Screenshot**:
+![User Info in MySQL](screenshots/screenshot6.png)
+
 
 ## Contributing
 
@@ -172,4 +203,3 @@ This project is open-source and available under the [MIT License](LICENSE).
 
 ---
 
-Feel free to add your specific API details and screenshots where necessary.
