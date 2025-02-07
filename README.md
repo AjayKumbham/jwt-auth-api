@@ -34,8 +34,8 @@ Before you begin, ensure you have met the following requirements:
 1. **Clone the Repository**:
 
    ```bash
-   git clone https://github.com/ajay-kumbham/JWT-Authentication.git
-   cd your-repository
+   git clone https://github.com/AjayKumbham/JWT-Authentication.git
+   cd JWT-Authentication
    ```
 
 2. **Configure Application Properties**:
