@@ -35,7 +35,7 @@ Before you begin, ensure you have met the following requirements:
 
    ```bash
    git clone https://github.com/AjayKumbham/jwt-auth-api.git
-   cd JWT-Authentication
+   cd jwt-auth-api
    ```
 
 2. **Configure Application Properties**:
