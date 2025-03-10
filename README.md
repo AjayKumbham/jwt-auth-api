@@ -34,7 +34,7 @@ Before you begin, ensure you have met the following requirements:
 1. **Clone the Repository**:
 
    ```bash
-   git clone https://github.com/AjayKumbham/JWT-Authentication.git
+   git clone https://github.com/AjayKumbham/jwt-auth-api.git
    cd JWT-Authentication
    ```
 
