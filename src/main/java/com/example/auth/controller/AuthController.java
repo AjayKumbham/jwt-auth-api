@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.auth.model.AuthRequest;
 import com.example.auth.model.UserInfo;
+import com.example.auth.service.CookieJwtService;
 import com.example.auth.service.JwtService;
 import com.example.auth.service.UserInfoService;
 
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 
 @RestController
@@ -29,6 +31,9 @@ public class AuthController {
 
     @Autowired
     private JwtService jwtService;
+
+    @Autowired
+    private CookieJwtService cookieJwtService;
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -57,16 +62,26 @@ public class AuthController {
     }
     
     @PostMapping("/login")
-    public ResponseEntity<String> authenticateAndGetToken(@Valid @RequestBody AuthRequest authRequest) {
+    public ResponseEntity<String> authenticateAndSetCookie(@Valid @RequestBody AuthRequest authRequest, 
+                                                          HttpServletResponse response) {
         Authentication authentication = authenticationManager.authenticate(
             new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword())
         );
         if (authentication.isAuthenticated()) {
             String token = jwtService.generateToken(authRequest.getUsername());
-            return ResponseEntity.ok(token); // Return the JWT token with a 200 status
+            // Set JWT token as HTTP-only cookie instead of returning in response body
+            cookieJwtService.addJwtCookieToResponse(response, token);
+            return ResponseEntity.ok("Login successful. JWT token set as HTTP-only cookie.");
         } else {
             // Return a proper error response if authentication fails
             return new ResponseEntity<>("Invalid user credentials", HttpStatus.UNAUTHORIZED);
         }
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<String> logout(HttpServletResponse response) {
+        // Clear the JWT cookie
+        cookieJwtService.clearJwtCookieFromResponse(response);
+        return ResponseEntity.ok("Logout successful. JWT cookie cleared.");
     }
 }

@@ -1,6 +1,7 @@
 package com.example.auth.filter;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +13,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import com.example.auth.service.CookieJwtService;
 import com.example.auth.service.JwtService;
 import com.example.auth.service.UserInfoService;
 
@@ -29,20 +31,28 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     private JwtService jwtService;
 
     @Autowired
+    private CookieJwtService cookieJwtService;
+
+    @Autowired
     private UserInfoService userDetailsService;
 
     @Override
     @SuppressWarnings("UseSpecificCatch")
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-        // Retrieve the Authorization header
-        String authHeader = request.getHeader("Authorization");
+        
+        // Extract JWT token from HTTP-only cookie
+        Optional<String> tokenOptional = cookieJwtService.extractTokenFromCookie(request);
         String token = null;
         String username = null;
-        // Check if the header starts with "Bearer "
-        if (authHeader != null && authHeader.startsWith("Bearer ")) {
-            token = authHeader.substring(7); // Extract token
-            username = jwtService.extractUsername(token); // Extract username from token
+        
+        if (tokenOptional.isPresent()) {
+            token = tokenOptional.get();
+            try {
+                username = jwtService.extractUsername(token);
+            } catch (Exception e) {
+                log.warn("Failed to extract username from JWT token: {}", e.getMessage());
+            }
         }
 
         // If the token is valid and no authentication is set in the context
@@ -56,6 +66,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                             userDetails, null, userDetails.getAuthorities());
                     authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                     SecurityContextHolder.getContext().setAuthentication(authToken);
+                    log.debug("Authentication set for user: {}", username);
                 } else {
                     log.warn("Invalid JWT token for user: {}", username);
                 }
