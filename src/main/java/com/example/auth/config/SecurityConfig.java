@@ -16,16 +16,21 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.example.auth.filter.JwtAuthFilter;
 import com.example.auth.service.UserInfoService;
+
+import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
 
-    private static final String[] PUBLIC_ENDPOINTS = {"/auth/welcome", "/auth/register", "/auth/login"};
+    private static final String[] PUBLIC_ENDPOINTS = {"/auth/welcome", "/auth/register", "/auth/login", "/auth/logout"};
     private static final String USER_ENDPOINTS = "/auth/user/**";
     private static final String ADMIN_ENDPOINTS = "/auth/admin/**";
 
@@ -41,6 +46,8 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+            // Configure CORS for cookie-based authentication
+            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             // Disable CSRF because this is a stateless REST API
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
@@ -56,6 +63,20 @@ public class SecurityConfig {
             .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class); // Apply JWT filter before authentication
 
         return http.build();
+    }
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOriginPatterns(Arrays.asList("*")); // Configure based on your frontend domain
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowedHeaders(Arrays.asList("*"));
+        configuration.setAllowCredentials(true); // Important for cookies
+        configuration.setMaxAge(3600L);
+        
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 
     @Bean
